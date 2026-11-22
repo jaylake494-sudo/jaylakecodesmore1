@@ -126,5 +126,130 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Lake Sites preview kit — scoped accent themes.
+ *
+ * Each preview wraps its content in one `theme-*` class so the shared design
+ * tokens (primary / accent / ring, plus a few extras) retrap to the trade's
+ * palette without touching the rest of the template. No inline styles needed —
+ * components use the standard Tailwind token utilities (bg-primary, text-ring,
+ * etc.) and inherit whichever theme wraps them.
+ * ------------------------------------------------------------------------- */
+
+/* Tree services — natural green / earthy */
+.theme-forest {
+  --primary: oklch(0.47 0.1 150);
+  --primary-foreground: oklch(0.985 0.01 150);
+  --secondary: oklch(0.95 0.03 148);
+  --secondary-foreground: oklch(0.34 0.08 150);
+  --muted: oklch(0.97 0.012 140);
+  --muted-foreground: oklch(0.47 0.02 150);
+  --accent: oklch(0.93 0.05 148);
+  --accent-foreground: oklch(0.34 0.09 150);
+  --border: oklch(0.89 0.02 148);
+  --input: oklch(0.89 0.02 148);
+  --ring: oklch(0.55 0.1 150);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 150);
+  --accent-strong: oklch(0.42 0.11 150);
+  --accent-glow: oklch(0.62 0.13 150);
+}
+
+/* Excavation — amber / slate / industrial */
+.theme-industrial {
+  --primary: oklch(0.55 0.13 62);
+  --primary-foreground: oklch(0.99 0.01 80);
+  --secondary: oklch(0.95 0.02 70);
+  --secondary-foreground: oklch(0.36 0.04 60);
+  --muted: oklch(0.97 0.008 70);
+  --muted-foreground: oklch(0.47 0.02 60);
+  --accent: oklch(0.93 0.05 72);
+  --accent-foreground: oklch(0.36 0.07 55);
+  --border: oklch(0.89 0.015 70);
+  --input: oklch(0.89 0.015 70);
+  --ring: oklch(0.6 0.13 62);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.02 60);
+  --accent-strong: oklch(0.45 0.09 50);
+  --accent-glow: oklch(0.68 0.15 62);
+}
+
+/* Landscaping — fresh green with warm sunset accent */
+.theme-sunset {
+  --primary: oklch(0.52 0.12 145);
+  --primary-foreground: oklch(0.99 0.01 140);
+  --secondary: oklch(0.95 0.03 130);
+  --secondary-foreground: oklch(0.36 0.07 145);
+  --muted: oklch(0.97 0.012 120);
+  --muted-foreground: oklch(0.47 0.02 140);
+  --accent: oklch(0.92 0.06 70);
+  --accent-foreground: oklch(0.42 0.1 45);
+  --border: oklch(0.89 0.02 135);
+  --input: oklch(0.89 0.02 135);
+  --ring: oklch(0.6 0.13 55);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.23 0.02 145);
+  --accent-strong: oklch(0.58 0.15 45);
+  --accent-glow: oklch(0.7 0.16 55);
+}
+
+/* Auto & truck — steel blue with a red accent */
+.theme-steel {
+  --primary: oklch(0.48 0.12 255);
+  --primary-foreground: oklch(0.99 0.005 255);
+  --secondary: oklch(0.95 0.015 255);
+  --secondary-foreground: oklch(0.34 0.05 255);
+  --muted: oklch(0.97 0.006 255);
+  --muted-foreground: oklch(0.47 0.02 255);
+  --accent: oklch(0.93 0.025 255);
+  --accent-foreground: oklch(0.34 0.07 255);
+  --border: oklch(0.89 0.012 255);
+  --input: oklch(0.89 0.012 255);
+  --ring: oklch(0.55 0.13 255);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 255);
+  --accent-strong: oklch(0.52 0.2 25);
+  --accent-glow: oklch(0.62 0.22 25);
+}
+
+@theme inline {
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-glow: var(--accent-glow);
+}
+
+/* Scroll-reveal entrance animation (driven by a tiny IntersectionObserver
+ * hook that toggles data-revealed on the element). Respects reduced motion. */
+@keyframes lake-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+}
+
+[data-reveal][data-revealed="true"] {
+  animation: lake-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  [data-reveal] {
+    opacity: 1;
+  }
+  [data-reveal][data-revealed="true"] {
+    animation: none;
   }
 }
